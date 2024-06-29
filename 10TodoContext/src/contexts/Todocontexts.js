@@ -14,7 +14,7 @@ export const Todocontexts = createContext({
 })
 
 
-export const Todouse = () =>{
+export const useTodo = () =>{
     return useContext(Todocontexts)
 }
 
