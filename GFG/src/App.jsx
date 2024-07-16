@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useReducer, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { useEffect } from 'react'
 function AddButton(props){
   
   return (
@@ -17,23 +18,11 @@ function DeleteButton(props){
   )
 }
 
-const AllBrands = [
-  {id: 1 , brandName : "puma"},
-  {id: 2 , brandName : "nike"},
-  {id: 3 , brandName : "adidas"},
-  {id: 4 , brandName : "reebok"},
-  {id: 5 , brandName : "flops"},
-]
+
 function App() {
   const [count, setCount] = useState(0)
   const [ search , setSearch] = useState('')
-  const [brands , setBrands] = useState(AllBrands)
 
-  const onSearchChange = (e) =>{
-    const filtered = e.target.value?.lenght> 0 ?  brands.filter((brand) => brand.brandName.includes(e.target.value.toLowerCase())) : AllBrands;
-    setBrands(filtered);
-
-  }
 
   const initial = {
     name: '',
@@ -45,7 +34,15 @@ function App() {
 
   const [form, setForm ] = useState(initial)
   
-  
+  useEffect(() => {
+    const URL = async () => {
+      const res = await fetch(`https://dummyjson.com/products/${count}`)
+        .then(res => res.json())
+        .then(data => console.log(data))
+    }
+  },[count])
+
+
 
   return (
     <>
@@ -97,21 +94,11 @@ function App() {
 
     <br></br>
     <br></br>
-    <div>
-      <p>Add Brands to your cards</p>
-      {
-        AllBrands.map(brand =>
-        <div>
-          <span>{brand.brandName}</span>
-          <button onClick={AddToCards}>Add to cards</button>
-        </div>
-        )
-      }
-    </div>
-    <div>
-      <p>Add Brands to your cards</p>
-    </div>
-    
+
+    <button onClick={() => setCount(count+1)}> Count - {count}</button>
+
+
+  
     </>
   )
 }
