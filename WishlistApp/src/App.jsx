@@ -21,7 +21,7 @@ function App () {
         value={todo}
       />
       <button
-      onClick={() =>  {setTodolist([...todolist, {id : uuid(), todo : todo , completed : false}])
+      onClick={() =>  {setTodolist([...todolist, {id : uuid(), todo:todo , completed : false}])
       setTodo('') } }>Add</button>
     </div>
     <div>
@@ -32,7 +32,7 @@ function App () {
           <input type='checkbox'
             onChange={(id) => todolist.map(todo => todo.id === id ?  {...todo, completed : !todo.completed} : todo)}
           />
-          <span className={todo.completed ? 'strike-through' : ''}>{todo.todo }</span>
+          <span className={`${todo.completed ? `strike-through` : ''}`}>{todo.todo }</span>
         </label>
         <button
         onClick={() => setTodolist(todolist.filter(t => t.id !== todo.id))}
